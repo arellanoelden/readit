@@ -4,6 +4,7 @@ export const getOne = model => async (req, res) => {
   try {
     const doc = await model
       .findOne({ _id: req.params.id })
+      .populate("createdBy")
       .lean()
       .exec();
 
@@ -22,6 +23,7 @@ export const getMany = model => async (req, res) => {
   try {
     const docs = await model
       .find()
+      .populate("createdBy")
       .lean()
       .exec();
 

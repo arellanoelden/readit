@@ -22,7 +22,7 @@ const SignUp = () => {
       })
     });
     const bearerTokenObject = await response.json();
-    console.log(bearerTokenObject);
+
     if (bearerTokenObject.token) {
       userTokenContext.setAuthToken(bearerTokenObject.token);
     }

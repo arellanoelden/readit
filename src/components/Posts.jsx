@@ -34,6 +34,7 @@ const Posts = () => {
                 {post.title}
               </Typography>
               <Typography>{post.textContent}</Typography>
+              <Typography>by {post.createdBy.username}</Typography>
             </section>
             <img src={post.imageUrl} alt={post.title} className="w-1/5" />
           </Paper>

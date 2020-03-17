@@ -52,7 +52,6 @@ const App = () => {
       });
       const user = await response.json();
       setUser(user.data);
-      console.log(user);
     };
     if (bearerToken) {
       fetchUser();

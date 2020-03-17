@@ -24,6 +24,7 @@ app.post("/signin", signin);
 
 app.post("*", protect);
 app.put("*", protect);
+app.get("/api/user", protect);
 app.use("/api/user", userRouter);
 app.use("/api/item", itemRouter);
 app.use("/api/list", listRouter);
