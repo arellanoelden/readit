@@ -1,9 +1,10 @@
 {
-  "name": "my-app",
+  "name": "readit",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.9.5",
+    "@material-ui/icons": "^4.9.1",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
@@ -21,6 +22,7 @@
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-redux": "^7.1.3",
+    "react-router-dom": "^5.1.2",
     "react-scripts": "3.3.0",
     "redux": "^4.0.5",
     "tailwindcss": "^1.2.0",
@@ -36,7 +38,7 @@
     "server": "nodemon --exec yarn restart-server",
     "restart-server": "rimraf dist && yarn build-server && yarn start-server",
     "start-server": "node dist/index.js",
-    "test-erver": "NODE_ENV=testing jest --forceExit --detectOpenHandles  --silent",
+    "test-server": "NODE_ENV=testing jest --forceExit --detectOpenHandles  --silent",
     "test-routes": "yarn test -t router",
     "test-models": "yarn test -t model",
     "test-controllers": "yarn test -t controllers",
