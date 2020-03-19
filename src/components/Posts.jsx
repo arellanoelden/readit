@@ -48,30 +48,6 @@ const Posts = () => {
     getPosts();
   }
 
-  async function upvote(post, increment = 1) {
-    await fetch(`http://localhost:3000/api/posts/${post._id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${bearerToken}`
-      },
-      body: JSON.stringify({
-        upvotes: post.upvotes + increment
-      })
-    });
-
-    await fetch(`http://localhost:3000/api/user`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${bearerToken}`
-      },
-      body: JSON.stringify({
-        upvotedPosts: [post._id, ...user.upvotedPosts]
-      })
-    });
-  }
-
   if (!posts) return <div>posts</div>;
   return (
     <div>
@@ -114,7 +90,14 @@ const Posts = () => {
         </form>
       )}
       {posts.map(post => {
-        return <Post key={post._id} post={post} user={user} />;
+        return (
+          <Post
+            key={post._id}
+            post={post}
+            user={user}
+            bearerToken={bearerToken}
+          />
+        );
       })}
     </div>
   );

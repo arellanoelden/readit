@@ -33,7 +33,15 @@ const UserPosts = () => {
   return (
     <div>
       {posts.map(post => {
-        return <Post key={post._id} post={post} user={user} edit={true} />;
+        return (
+          <Post
+            key={post._id}
+            post={post}
+            user={user}
+            edit={true}
+            bearerToken={bearerToken}
+          />
+        );
       })}
     </div>
   );
