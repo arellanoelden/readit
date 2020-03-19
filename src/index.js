@@ -3,12 +3,12 @@ import ReactDOM from "react-dom";
 import "./styles.css"; // <- change './index.css' to './styles.css'
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
-import UserTokenProvider from "./providers/UserTokenProvider";
+import UserProvider from "./providers/UserProvider";
 
 ReactDOM.render(
-  <UserTokenProvider>
+  <UserProvider>
     <App />
-  </UserTokenProvider>,
+  </UserProvider>,
   document.getElementById("root")
 );
 serviceWorker.unregister();
