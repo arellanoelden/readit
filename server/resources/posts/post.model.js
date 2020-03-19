@@ -15,6 +15,10 @@ const postSchema = new mongoose.Schema(
       type: mongoose.SchemaTypes.ObjectId,
       ref: "user",
       required: true
+    },
+    upvotes: {
+      type: Number,
+      default: 0
     }
   },
   { timestamps: true }

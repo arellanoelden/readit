@@ -19,6 +19,8 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true
     },
+    upvotedPosts: [{ type: mongoose.SchemaTypes.ObjectId, ref: "post" }],
+    downvotedPosts: [{ type: mongoose.SchemaTypes.ObjectId, ref: "post" }],
     settings: {
       theme: {
         type: String,

@@ -21,11 +21,22 @@ export const getOne = model => async (req, res) => {
 
 export const getMany = model => async (req, res) => {
   try {
-    const docs = await model
-      .find()
-      .populate("createdBy")
-      .lean()
-      .exec();
+    let docs;
+    if (req.query.user) {
+      docs = await model
+        .find({ createdBy: req.query.user })
+        .sort({ createdAt: -1 })
+        .populate("createdBy")
+        .lean()
+        .exec();
+    } else {
+      docs = await model
+        .find()
+        .sort({ createdAt: -1 })
+        .populate("createdBy")
+        .lean()
+        .exec();
+    }
 
     res.status(200).json({ data: docs });
   } catch (e) {

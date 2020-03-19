@@ -1,12 +1,14 @@
-import React, { useEffect, useContext, useState } from "react";
+import React, { useContext } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import { UserTokenContext } from "./providers/UserTokenProvider";
+import { UserContext } from "./providers/UserProvider";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import { red, cyan, grey } from "@material-ui/core/colors";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import SignUp from "./components/SignUp";
 import SignIn from "./components/SignIn";
 import Posts from "./components/Posts";
+import UserPosts from "./components/UserPosts";
+
 import {
   AppBar,
   Toolbar,
@@ -17,9 +19,8 @@ import {
 import MenuIcon from "@material-ui/icons/Menu";
 
 const App = () => {
-  const userTokenContext = useContext(UserTokenContext);
-  const bearerToken = userTokenContext.userToken;
-  const [user, setUser] = useState();
+  const userContext = useContext(UserContext);
+  const user = userContext.user;
 
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
 
@@ -42,25 +43,8 @@ const App = () => {
     [prefersDarkMode]
   );
 
-  useEffect(() => {
-    const fetchUser = async () => {
-      const response = await fetch("http://localhost:3000/api/user", {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${bearerToken}`
-        }
-      });
-      const user = await response.json();
-      setUser(user.data);
-    };
-    if (bearerToken) {
-      fetchUser();
-    }
-  }, [userTokenContext, bearerToken]);
-
   function logOut() {
-    setUser(null);
-    userTokenContext.setAuthToken(null);
+    userContext.setAuthToken(null);
   }
 
   return (
@@ -72,10 +56,13 @@ const App = () => {
               <IconButton edge="start" color="inherit" aria-label="menu">
                 <MenuIcon />
               </IconButton>
+              rEAdit
             </Link>
             {user ? (
               <div className="flex items-center">
-                <Typography className="mr-2">{user.username}</Typography>
+                <Link to="/user">
+                  <Typography className="mr-2">{user.username}</Typography>
+                </Link>
                 <Button color="secondary" onClick={() => logOut()}>
                   Logout
                 </Button>
@@ -97,6 +84,9 @@ const App = () => {
             </Route>
             <Route path="/signin">
               <SignIn />
+            </Route>
+            <Route path="/user">
+              <UserPosts />
             </Route>
             <Route path="/">
               <Posts />

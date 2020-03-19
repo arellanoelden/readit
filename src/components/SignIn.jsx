@@ -1,9 +1,12 @@
 import React, { useState, useContext } from "react";
-import { UserTokenContext } from "../providers/UserTokenProvider";
+import { UserContext } from "../providers/UserProvider";
 import { Paper, TextField, Button, Typography } from "@material-ui/core";
+import { useHistory } from "react-router-dom";
 
 const SignIn = () => {
-  const userTokenContext = useContext(UserTokenContext);
+  const history = useHistory();
+
+  const userContext = useContext(UserContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -20,9 +23,10 @@ const SignIn = () => {
       })
     });
     const bearerTokenObject = await response.json();
-    console.log(bearerTokenObject);
+
     if (bearerTokenObject.token) {
-      userTokenContext.setAuthToken(bearerTokenObject.token);
+      userContext.setAuthToken(bearerTokenObject.token);
+      history.push("/");
     }
   }
 
