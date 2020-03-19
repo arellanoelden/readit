@@ -1,14 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { UserContext } from "../providers/UserProvider";
-import {
-  Paper,
-  Typography,
-  TextField,
-  Button,
-  IconButton
-} from "@material-ui/core";
-import KeyBoardArrowUp from "@material-ui/icons/KeyboardArrowUp";
-import KeyBoardArrowDown from "@material-ui/icons/KeyboardArrowDown";
+import { TextField, Button } from "@material-ui/core";
+import Post from "./Post";
 
 const Posts = () => {
   const userContext = useContext(UserContext);
@@ -121,46 +114,7 @@ const Posts = () => {
         </form>
       )}
       {posts.map(post => {
-        return (
-          <Paper
-            key={post._id}
-            elevation={3}
-            className="flex justify-between p-2 m-4"
-          >
-            <section>
-              <Typography variant="h2" className="my-2">
-                {post.title}
-              </Typography>
-              {user && user.upvotedPosts.includes(post._id) ? "UPVOTED" : ""}
-              <IconButton
-                edge="start"
-                color="inherit"
-                aria-label="menu"
-                className="my-4"
-                onClick={() => upvote(post)}
-                disabled={!user}
-              >
-                <KeyBoardArrowUp />
-              </IconButton>
-              <Typography>{post.upvotes}</Typography>
-              <IconButton
-                edge="start"
-                color="inherit"
-                aria-label="menu"
-                className="my-4"
-                onClick={() => upvote(post)}
-                disabled={!user}
-              >
-                <KeyBoardArrowDown />
-              </IconButton>
-              <Typography>{post.textContent}</Typography>
-              <Typography>by {post.createdBy.username}</Typography>
-            </section>
-            {post.imageUrl && (
-              <img src={post.imageUrl} alt={post.title} className="w-1/5" />
-            )}
-          </Paper>
-        );
+        return <Post key={post._id} post={post} user={user} />;
       })}
     </div>
   );

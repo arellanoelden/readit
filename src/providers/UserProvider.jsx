@@ -4,8 +4,8 @@ export const UserContext = createContext();
 
 class UserProvider extends Component {
   state = {
-    userToken: null,
-    user: null
+    userToken: localStorage.getItem("bearerToken"),
+    user: JSON.parse(localStorage.getItem("user"))
   };
   setAuthToken = this.setAuthToken.bind(this);
 
@@ -15,6 +15,7 @@ class UserProvider extends Component {
         userToken,
         user: null
       });
+      localStorage.clear();
     } else {
       const fetchUser = async () => {
         const response = await fetch("http://localhost:3000/api/user", {
@@ -28,7 +29,8 @@ class UserProvider extends Component {
           userToken,
           user: user.data
         });
-        console.log(user);
+        localStorage.setItem("bearerToken", userToken);
+        localStorage.setItem("user", JSON.stringify(user.data));
       };
       if (userToken) {
         fetchUser();
