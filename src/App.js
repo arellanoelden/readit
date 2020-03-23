@@ -52,12 +52,7 @@ const App = () => {
       <Router>
         <AppBar position="sticky">
           <Toolbar className="flex justify-between">
-            <Link to="/">
-              <IconButton edge="start" color="inherit" aria-label="menu">
-                <MenuIcon />
-              </IconButton>
-              rEAdit
-            </Link>
+            <Link to="/">rEAdit</Link>
             {user ? (
               <div className="flex items-center">
                 <Link to="/user">
